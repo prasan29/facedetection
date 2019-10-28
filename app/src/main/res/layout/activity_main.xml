@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.facedetector.viewmodel.MainViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".view.MainActivity">
+
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
+            android:layout_gravity="center_horizontal"
+            android:padding="24dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:onClick="@{() -> viewModel.onFetchImage()}"
+            android:padding="12dp"
+            android:text="@{viewModel.mFetchButton}"
+            android:textAllCaps="false" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:enabled="@{viewModel.mIsButtonVisible}"
+            android:onClick="@{() -> viewModel.onDetectPressed()}"
+            android:padding="12dp"
+            android:text="@{viewModel.mDetectFaceButton}"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+</layout>
