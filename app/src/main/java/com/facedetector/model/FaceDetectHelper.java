@@ -34,7 +34,7 @@ public class FaceDetectHelper {
         return mFaceDetectHelper;
     }
 
-    public String processImage(Bitmap bitmap, Context context, ImageView imageView) {
+    public String detectFace(Bitmap bitmap, Context context, ImageView imageView) {
         if (mFaceDetector.isOperational() && bitmap != null) {
             editedBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap
                     .getHeight(), bitmap.getConfig());

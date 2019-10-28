@@ -37,7 +37,7 @@ public class MainViewModel extends ViewModel {
     }
 
     public void onDetectPressed() {
-        String result = mFaceDetector.processImage(mDetectImage, mActivity, mGalleryImage);
+        String result = mFaceDetector.detectFace(mDetectImage, mActivity, mGalleryImage);
         Toast.makeText(mActivity, result, Toast.LENGTH_SHORT).show();
     }
 
