@@ -1,14 +1,16 @@
 package com.facedetector.viewmodel;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.facedetector.R;
+import com.facedetector.model.FaceDetectHelper;
 import com.facedetector.util.ApplicationConstants;
 import com.facedetector.view.MainActivity;
 
@@ -18,7 +20,9 @@ public class MainViewModel extends ViewModel {
     public MutableLiveData<String> mDetectFaceButton = new MutableLiveData<>();
     public MutableLiveData<Boolean> mIsButtonVisible = new MutableLiveData<>();
     private ImageView mGalleryImage;
-    private MainActivity mActivity;
+    private Activity mActivity;
+    private FaceDetectHelper mFaceDetector;
+    private Bitmap mDetectImage;
 
     public MainViewModel() {
         mFetchButton.setValue("Fetch image");
@@ -29,10 +33,12 @@ public class MainViewModel extends ViewModel {
     public void setActivity(MainActivity activity) {
         mActivity = activity;
         mGalleryImage = mActivity.findViewById(R.id.image_view);
+        mFaceDetector = FaceDetectHelper.getInstance(activity);
     }
 
     public void onDetectPressed() {
-        Log.e(TAG, "onDetectPressed()");
+        String result = mFaceDetector.processImage(mDetectImage, mActivity, mGalleryImage);
+        Toast.makeText(mActivity, result, Toast.LENGTH_SHORT).show();
     }
 
     public void setCallback(MainActivity.Callback callback) {
@@ -46,6 +52,7 @@ public class MainViewModel extends ViewModel {
     }
 
     private void onImageFetched(Bitmap bitmap) {
+        mDetectImage = bitmap;
         mGalleryImage.setImageBitmap(bitmap);
         mIsButtonVisible.setValue(true);
     }

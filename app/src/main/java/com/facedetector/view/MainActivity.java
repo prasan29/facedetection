@@ -47,10 +47,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == ApplicationConstants.RESULT_LOAD_IMAGE &&
                 resultCode == RESULT_OK && null != data) {
-            Uri selectedImage = data.getData();
             Bitmap bitmap = null;
             try {
-                bitmap = getBitmapFromUri(selectedImage);
+                bitmap = getBitmapFromUri(data.getData());
             } catch (IOException e) {
                 Log.e(TAG, "No image found!");
             }
