@@ -37,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
         binding.setLifecycleOwner(this);
     }
 
+    /**
+     * Method to set the callback for retrieving the image from the gallery.
+     *
+     * @param listener To listen the retrieved image.
+     */
     private void setCallback(MainViewModel.OnImageFetchedListener listener) {
         mListener = listener;
     }
@@ -57,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method to extract the Bitmap from URI.
+     */
     private Bitmap getBitmapFromUri(Uri uri) throws IOException {
         ParcelFileDescriptor parcelFileDescriptor =
                 getContentResolver().openFileDescriptor(uri, "r");
@@ -66,7 +74,15 @@ public class MainActivity extends AppCompatActivity {
         return image;
     }
 
+    /**
+     * Interface for create a communication for image retrieval.
+     */
     public interface Callback {
+        /**
+         * Method to set the callback for retrieving the image from the gallery.
+         *
+         * @param listener To listen the retrieved image.
+         */
         void setCallback(MainViewModel.OnImageFetchedListener listener);
     }
 }

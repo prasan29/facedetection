@@ -13,11 +13,19 @@ import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 import com.google.android.gms.vision.face.Landmark;
 
+/**
+ * Class to detect faces from the selected media source.
+ */
 public class FaceDetectHelper {
     private static FaceDetectHelper mFaceDetectHelper;
     private static FaceDetector mFaceDetector;
     private Bitmap editedBitmap;
 
+    /**
+     * Constructor to build the FaceDetector object.
+     *
+     * @param context Context to get the Application context.
+     */
     private FaceDetectHelper(Context context) {
         mFaceDetector = new FaceDetector.Builder(context.getApplicationContext())
                 .setTrackingEnabled(false)
@@ -26,6 +34,12 @@ public class FaceDetectHelper {
                 .build();
     }
 
+    /**
+     * Method to instantiate FaceDetectHelper instance.
+     *
+     * @param context Context to build FaceDetectHelper instance.
+     * @return FaceDetectHelper instance.
+     */
     public static FaceDetectHelper getInstance(Context context) {
         if (mFaceDetectHelper == null) {
             mFaceDetectHelper = new FaceDetectHelper(context);
@@ -34,7 +48,15 @@ public class FaceDetectHelper {
         return mFaceDetectHelper;
     }
 
-    public String detectFace(Bitmap bitmap, Context context, ImageView imageView) {
+    /**
+     * Method to detect the faces found in the Bitmap.
+     *
+     * @param bitmap    Bitmap for which the faces are to be detected.
+     * @param context   Context for getting the resources.
+     * @param imageView To detect and draw the rectangles.
+     * @return String result.
+     */
+    public String processImage(Bitmap bitmap, Context context, ImageView imageView) {
         if (mFaceDetector.isOperational() && bitmap != null) {
             editedBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap
                     .getHeight(), bitmap.getConfig());
